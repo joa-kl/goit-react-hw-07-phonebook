@@ -36,7 +36,6 @@ export const ContactList = () => {
             <button
               type="button"
               className={css.contactListItemBtn}
-              // disabled={loading}
               onClick={() => deleteContact(id)}
             >
               Delete
