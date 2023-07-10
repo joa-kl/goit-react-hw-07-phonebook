@@ -10,6 +10,8 @@ const ContactForm = () => {
     const dispatch = useDispatch();
     // const contacts = [];
     const contacts = useSelector(selectContacts);
+    console.log(contacts);
+
     const [form, setForm] = useState({
         name: "",
         number: "",
@@ -26,7 +28,7 @@ const ContactForm = () => {
     const isUniqueContact = () => {
         const doesExistContact = contacts.find(contact => contact.name === name);
         if (doesExistContact) {
-        Notify.failure("Contact is already exist");
+        Notify.failure("Contact already exists");
         }
         return !doesExistContact;
     };
