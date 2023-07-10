@@ -9,8 +9,8 @@ import { addContact } from "redux/operations";
 
 const ContactForm = () => {
     const dispatch = useDispatch();
-    const contacts = [];
-    // const contacts = useSelector(selectContacts);
+    // const contacts = [];
+    const contacts = useSelector(selectContacts);
     const [form, setForm] = useState({
         name: "",
         number: "",
