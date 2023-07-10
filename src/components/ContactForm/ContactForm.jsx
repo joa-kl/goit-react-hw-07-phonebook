@@ -24,11 +24,11 @@ const ContactForm = () => {
 
 
     const isUniqueContact = () => {
-        const isExistContact = contacts.find(contact => contact.name === name);
-        if (isExistContact) {
+        const doesExistContact = contacts.find(contact => contact.name === name);
+        if (doesExistContact) {
         Notify.failure("Contact is already exist");
         }
-        return !isExistContact;
+        return !doesExistContact;
     };
 
 
