@@ -39,6 +39,6 @@ export const deleteContact = createAsyncThunk(
     }
 )
 
-export const filterContact = createAsyncThunk(
-    ""
-)
+// export const filterContact = createAsyncThunk(
+//     ""
+// )

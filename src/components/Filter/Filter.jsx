@@ -1,7 +1,7 @@
 import css from './Filter.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilter } from 'redux/selectors';
-import { filterContact } from 'redux/slices/filterSlice';
+import { filterContact, setFilter } from 'redux/slices/filterSlice';
 
 export const Filter = () => {
 
@@ -17,7 +17,7 @@ export const Filter = () => {
         name="filter"
         placeholder="Enter name"
         value={filterValue}
-        onChange={event => dispatch(filterContact(event.target.value.trim()))}
+        onChange={event => dispatch(setFilter(event.target.value.trim()))}
       />
     </div>
 )};
