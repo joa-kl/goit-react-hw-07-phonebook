@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import css from "./ContactForm.module.css"
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
@@ -8,7 +8,6 @@ import { addContact } from "redux/operations";
 
 const ContactForm = () => {
     const dispatch = useDispatch();
-    // const contacts = [];
     const contacts = useSelector(selectContacts);
 
 
@@ -17,30 +16,11 @@ const ContactForm = () => {
         number: "",
     })
 
-
     const handleChange = ({ target }) => {
         const { name, value } = target;
         setForm(prevForm => ({ ...prevForm, [name]: value }));
     };
     const { name, number } = form;
-
-
-    // const isUniqueContact = () => {
-    //     const doesExistContact = contacts.find(contact => contact.name === name);
-    //     if (doesExistContact) {
-    //     Notify.failure("Contact already exists");
-    //     }
-    //     return !doesExistContact;
-    // };
-
-
-    //  const validateForm = () => {
-    //     if (!name || !number) {
-    //     Notify.failure("Some field is empty");
-    //     return false;
-    //     }
-    //     return isUniqueContact(name);
-    // };
 
 
     const handleFormSubmit = event => {
@@ -76,7 +56,6 @@ const ContactForm = () => {
     //     localStorage.setItem("contacts", JSON.stringify(contacts));
     //     }
     // }, [contacts]);
-
 
 
     return (
