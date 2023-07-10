@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import css from "./ContactForm.module.css"
 import { useDispatch, useSelector } from "react-redux";
-import { handleAddContact } from "redux/slices/contactSlice";
 import { nanoid } from "nanoid";
 import { Notify } from "notiflix";
 import { selectContacts } from "redux/selectors";
@@ -46,11 +45,10 @@ const ContactForm = () => {
         event.preventDefault();
         const isValidateForm = validateForm();
         if (!isValidateForm) return;
-
         dispatch(
-        addContact({ id: nanoid(), name, number }),
-        Notify.success("Contact was added to phonebook"),
-        );
+            addContact({ id: nanoid(), name, number }),
+            Notify.success("Contact was added to phonebook"),
+            );
         const resetForm = () => setForm({ name: "", number: "" });
         resetForm();
     };

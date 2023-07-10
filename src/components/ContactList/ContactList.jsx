@@ -1,9 +1,8 @@
 import propTypes from 'prop-types';
 import css from './ContactList.module.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { handleRemoveContact } from 'redux/slices/contactSlice';
 import { Notify } from 'notiflix';
-import { selectContacts, selectFilter } from 'redux/selectors';
+import { loadingSelector, selectFilter } from 'redux/selectors';
 import { deleteContact, fetchContacts } from 'redux/operations';
 import { useEffect } from 'react';
 
@@ -12,6 +11,7 @@ export const ContactList = () => {
   const contacts = [];
   const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
+  const loading = useSelector(loadingSelector);
 
   // const filteredContacts = contacts?.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()));
 
@@ -37,6 +37,7 @@ export const ContactList = () => {
             <button
               type="button"
               className={css.contactListItemBtn}
+              disabled={loading}
               onClick={() => 
                 dispatch(
                   deleteContact(id),
