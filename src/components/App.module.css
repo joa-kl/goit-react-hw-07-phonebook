@@ -1,14 +1,9 @@
-.wrapper {
+.container {
+    height: 100vh;
     display: flex;
-    justify-content: space-between;
-}
-
-.section {
-    display: grid;
-    gap: 4px;
-}
-
-.title {
-    margin: 0;
-    font-size: 16px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-synthesis: 20;
+    color: #010101,
 }
