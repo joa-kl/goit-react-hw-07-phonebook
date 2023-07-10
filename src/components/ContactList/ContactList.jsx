@@ -20,8 +20,8 @@ export const ContactList = () => {
 
   const deleteContact = id => {
     dispatch(
-      deleteContact(id),
-      Notify.warning("Contact was deleted"));
+      deleteContact(id));
+      Notify.warning("Contact was deleted");
   };
 
   return (
