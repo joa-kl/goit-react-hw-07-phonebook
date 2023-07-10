@@ -10,7 +10,7 @@ const ContactForm = () => {
     const dispatch = useDispatch();
     // const contacts = [];
     const contacts = useSelector(selectContacts);
-    console.log(contacts);
+
 
     const [form, setForm] = useState({
         name: "",
@@ -25,43 +25,57 @@ const ContactForm = () => {
     const { name, number } = form;
 
 
-    const isUniqueContact = () => {
-        const doesExistContact = contacts.find(contact => contact.name === name);
-        if (doesExistContact) {
-        Notify.failure("Contact already exists");
-        }
-        return !doesExistContact;
-    };
+    // const isUniqueContact = () => {
+    //     const doesExistContact = contacts.find(contact => contact.name === name);
+    //     if (doesExistContact) {
+    //     Notify.failure("Contact already exists");
+    //     }
+    //     return !doesExistContact;
+    // };
 
 
-     const validateForm = () => {
-        if (!name || !number) {
-        Notify.failure("Some field is empty");
-        return false;
-        }
-        return isUniqueContact(name);
-    };
+    //  const validateForm = () => {
+    //     if (!name || !number) {
+    //     Notify.failure("Some field is empty");
+    //     return false;
+    //     }
+    //     return isUniqueContact(name);
+    // };
 
 
     const handleFormSubmit = event => {
         event.preventDefault();
-        const isValidateForm = validateForm();
-        if (!isValidateForm) return;
+
+        const contact = {
+                id: nanoid(),
+                name: event.currentTarget.elements.name.value,
+                number: event.currentTarget.elements.number.value,
+            };
+        
+        const doesExist = contacts.find(
+            ({ name }) => name.toLowerCase() === contact.name.toLowerCase()
+            );
+
+        if (doesExist) {
+            return Notify.failure("Contact already exists");
+        }
+
         dispatch(
-            addContact({ id: nanoid(), name, number }),
+            addContact(contact),
             Notify.success("Contact was added to phonebook"),
             );
+        
         const resetForm = () => setForm({ name: "", number: "" });
-        resetForm();
-    };
-    
+            resetForm();
+        };
+        
 
 
-    useEffect(() => {
-        if (contacts) {
-        localStorage.setItem("contacts", JSON.stringify(contacts));
-        }
-    }, [contacts]);
+    // useEffect(() => {
+    //     if (contacts) {
+    //     localStorage.setItem("contacts", JSON.stringify(contacts));
+    //     }
+    // }, [contacts]);
 
 
 
@@ -74,7 +88,7 @@ const ContactForm = () => {
                     pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                     title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                     placeholder="Enter name"
-                    value={name}
+                    // value={name}
                     onChange={handleChange}
                     className={css.input}
                     required
@@ -86,7 +100,7 @@ const ContactForm = () => {
                     pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                     title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                     placeholder="Enter phone number"
-                    value={number}
+                    // value={number}
                     onChange={handleChange}
                     className={css.input}
                     required

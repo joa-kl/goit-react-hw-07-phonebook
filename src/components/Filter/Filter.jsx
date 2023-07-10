@@ -17,7 +17,7 @@ export const Filter = () => {
         name="filter"
         placeholder="Enter name"
         value={filterValue}
-        onChange={event => dispatch(filterContact(event.target.value))}
+        onChange={event => dispatch(filterContact(event.target.value.trim()))}
       />
     </div>
 )};

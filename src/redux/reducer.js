@@ -2,10 +2,10 @@
 
 import { combineReducers } from "@reduxjs/toolkit";
 import { contactsFilterSlice } from "./slices/filterSlice";
-import { contactsItemsSlice } from "./slices/contactSlice";
+import { contactsSlice } from "./slices/contactSlice";
 
 const contactsReducer = combineReducers({
-    [contactsItemsSlice.name]: contactsItemsSlice.reducer,
+    [contactsSlice.name]: contactsSlice.reducer,
     [contactsFilterSlice.name]: contactsFilterSlice.reducer,
 });
 
