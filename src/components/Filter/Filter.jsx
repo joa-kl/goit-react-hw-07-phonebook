@@ -1,7 +1,7 @@
 import css from './Filter.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilter } from 'redux/selectors';
-import { filterContact, setFilter } from 'redux/filterSlice';
+import { setFilter } from 'redux/filterSlice';
 
 export const Filter = () => {
 
@@ -22,7 +22,3 @@ export const Filter = () => {
     </div>
 )};
 
-// Filter.propTypes = {
-//   filter: propTypes.string.isRequired,
-//   onFilterChange: propTypes.func.isRequired,
-// };
