@@ -10,31 +10,18 @@ const ContactForm = () => {
     const dispatch = useDispatch();
     const contacts = useSelector(selectContacts);
 
-
-    const [form, setForm] = useState({
-        name: "",
-        number: "",
-    })
-
-    const handleChange = ({ target }) => {
-        const { name, value } = target;
-        setForm(prevForm => ({ ...prevForm, [name]: value }));
-    };
-    const { name, number } = form;
-
-
     const handleFormSubmit = event => {
         event.preventDefault();
 
         const contact = {
-                id: nanoid(),
-                name: event.currentTarget.elements.name.value,
-                number: event.currentTarget.elements.number.value,
-            };
+            id: nanoid(),
+            name: event.currentTarget.elements.name.value,
+            number: event.currentTarget.elements.number.value,
+        };
         
         const doesExist = contacts.find(
             ({ name }) => name.toLowerCase() === contact.name.toLowerCase()
-            );
+        );
 
         if (doesExist) {
             return Notify.failure("Contact already exists");
@@ -43,51 +30,44 @@ const ContactForm = () => {
         dispatch(
             addContact(contact),
             Notify.success("Contact was added to phonebook"),
-            );
+            event.currentTarget.reset()
+        );
+    }
         
-        const resetForm = () => setForm({ name: "", number: "" });
-            resetForm();
-        };
-        
+        // useEffect(() => {
+        //     if (contacts) {
+        //     localStorage.setItem("contacts", JSON.stringify(contacts));
+        //     }
+        // }, [contacts]);
 
 
-    // useEffect(() => {
-    //     if (contacts) {
-    //     localStorage.setItem("contacts", JSON.stringify(contacts));
-    //     }
-    // }, [contacts]);
-
-
-    return (
-        <form onSubmit={handleFormSubmit} className={css.form}>
-            <label className={css.label}>Name</label>
+        return (
+            <form onSubmit={handleFormSubmit} className={css.form}>
+                <label className={css.label}>Name</label>
                 <input
                     type="text"
                     name="name"
                     pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                     title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                     placeholder="Enter name"
-                    // value={name}
-                    onChange={handleChange}
                     className={css.input}
                     required
-            />
-            <label className={css.label}>Number</label>
+                />
+                <label className={css.label}>Number</label>
                 <input
                     type="tel"
                     name="number"
                     pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                     title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                     placeholder="Enter phone number"
-                    // value={number}
-                    onChange={handleChange}
                     className={css.input}
                     required
-                    />
+                />
 
                 <button type="submit" className={css.button}>Add contact</button>
-        </form>
-    )
+            </form>
+        )
     }
+
 
 export default ContactForm;
