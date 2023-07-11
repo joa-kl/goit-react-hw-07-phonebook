@@ -3,7 +3,7 @@ import css from './ContactList.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { Notify } from 'notiflix';
 import { selectError, selectFilteredContacts, selectIsLoading } from 'redux/selectors';
-import {fetchContacts } from 'redux/operations';
+import {deleteContact, fetchContacts } from 'redux/operations';
 import { useEffect } from 'react';
 
 export const ContactList = () => {
@@ -18,7 +18,7 @@ export const ContactList = () => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  const deleteContact = id => {
+  const onDeleteContact = id => {
     dispatch(
       deleteContact(id));
       Notify.warning("Contact was deleted");
@@ -36,7 +36,7 @@ export const ContactList = () => {
             <button
               type="button"
               className={css.contactListItemBtn}
-              onClick={() => deleteContact(id)}
+              onClick={() => onDeleteContact(id)}
             >
               Delete
             </button>
